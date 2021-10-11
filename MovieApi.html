@@ -5,18 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #box{
+            width: 600px;
+            margin: auto;
+            background-color: rgb(159, 211, 212);
+           
+        }
+        input{
+            margin-left: 19%;
+            border: none;
+            border-bottom:groove black;
+            width: 300px;
+            height: 40px;
+            text-align: center;
+       
+        }
+    button{
+        display: block;
+        text-align: center;
+        width: 180px;
+        background-color: rgb(219, 217, 57);
+        font-size: 30px;
+        height: 40px;
+        border-radius: 8%;
+        color: rgb(24, 7, 10);
+        margin-left: 70%;
+    }
+        #bigbox{
+background-color: rgb(228, 181, 148);
+height: 1000px;
+        }
+        #title{
+            color: darkblue;
+            margin: auto;
+            font-size: 40px;
+            text-align: center;
+            padding: 30px;
+            width: 500px;
+            background-color: rgb(174, 196, 236);
+            border-radius: 50%;
+            margin-top: -3px;
+        }
+    </style>
 </head>
 <body>
+    <div id="bigbox">
+       
+        <p id="title">Search Your Favorite Movie</p>
+    <div id="box">
     <input type="text" placeholder="Movie" id="movie">
     <button onclick="moviesearch()">Search</button>
+    
+    </div>
+    <div id="box1"></div>
+</div>
+
 </body>
 </html>
 <script>
+    var box=document.getElementById("box1")
+    
     async function moviesearch(){
+        box1.innerHTML=null
         let movie=document.getElementById("movie").value;
-        let res=await fetch (`http://www.omdbapi.com/?t=${movie}&apikey=c177405a` );
+        let res= await fetch (`http://www.omdbapi.com/?t=${movie}&apikey=c177405a` );
         // (`http://www.omdbapi.com/?t=${movie}&apikey=c177405a`)
         let data=await res.json();
+        var div=document.createElement("div")
+        var img=document.createElement("img")
+        img.src=data.Poster;
+        div.style.width="300px";
+        div.style.marginTop="5%";
+        img.style.width="100%"
+        div.append(img);
+        box.append(div)
         console.log(data)
     }
     
