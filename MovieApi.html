@@ -100,14 +100,23 @@ height: 1000px;
         div.append(img);
         box.append(div)
         var db=document.createElement("div");
-        
+        // if(+data.imdbRating>8){
+        //     var recom=document.createElement("h1");
+        //     h1.innerText="Recommended";
+        //     h1.style.color="red";
+        //     db.append(h1)
+        // }
            db.style.width="200px";
            db.style.height="300px";
            db.style.marginTop="40px";
            db.style.marginLeft="60px"
         //    db.style.backgroundColor="blue";
            db.style.fontSize="20px";
-           db.style.color="red"
+           db.style.color="red";
+           var h1=document.createElement("h2");
+           h1.innerText="Recommended";
+           h1.style.backgroundColor="darkblue;"
+          
         var title=document.createElement("p")
         title.innerText= "Title  : "+data.Title
         var director=document.createElement("p")
@@ -115,7 +124,10 @@ height: 1000px;
         var boxoffice=document.createElement("p")
         boxoffice.innerText= "BoxOffice : "+data.BoxOffice
         var imdbrating=document.createElement("p")
-        imdbrating.innerText= "imdbRating : "+data.imdbRating
+        imdbrating.innerText= "imdbRating : "+data.imdbRating;
+        if(data.imdbRating>8){
+            db.append(h1)
+        }
         var releasedate=document.createElement("p")
         releasedate.innerText= "Released : "+data.Released;
         db.append(title,director,boxoffice,imdbrating,releasedate)
