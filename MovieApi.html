@@ -49,6 +49,9 @@ height: 1000px;
             border-radius: 50%;
             margin-top: -3px;
         }
+        #box3{
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -58,32 +61,88 @@ height: 1000px;
     <div id="box">
     <input type="text" placeholder="Movie" id="movie">
     <button onclick="moviesearch()">Search</button>
-    
+    <div id="box3"></div>
     </div>
-    <div id="box1"></div>
+    
 </div>
 
 </body>
 </html>
 <script>
-    var box=document.getElementById("box1")
+    
     
     async function moviesearch(){
-        box1.innerHTML=null
+        var box=document.getElementById("box3")
+        box.innerHTML=null
+        try{
+         
         let movie=document.getElementById("movie").value;
-        let res= await fetch (`http://www.omdbapi.com/?t=${movie}&apikey=c177405a` );
-        // (`http://www.omdbapi.com/?t=${movie}&apikey=c177405a`)
+        
+       
+         
+            let res= await fetch (`https://www.omdbapi.com/?t=${movie}&apikey=c177405a`)
+            //    try to remember
+           if(res.status!=200){
+               throw new Error();
+              
+           }
+           
         let data=await res.json();
         var div=document.createElement("div")
         var img=document.createElement("img")
         img.src=data.Poster;
+     
         div.style.width="300px";
         div.style.marginTop="5%";
         img.style.width="100%"
+        var title=document.createElement("p");
+       
         div.append(img);
         box.append(div)
+        var db=document.createElement("div");
+        
+           db.style.width="200px";
+           db.style.height="300px";
+           db.style.marginTop="40px";
+           db.style.marginLeft="60px"
+        //    db.style.backgroundColor="blue";
+           db.style.fontSize="20px";
+           db.style.color="red"
+        var title=document.createElement("p")
+        title.innerText= "Title  : "+data.Title
+        var director=document.createElement("p")
+        director.innerText= "Director  : " +data.Director
+        var boxoffice=document.createElement("p")
+        boxoffice.innerText= "BoxOffice : "+data.BoxOffice
+        var imdbrating=document.createElement("p")
+        imdbrating.innerText= "imdbRating : "+data.imdbRating
+        var releasedate=document.createElement("p")
+        releasedate.innerText= "Released : "+data.Released;
+        db.append(title,director,boxoffice,imdbrating,releasedate)
+        box.append(db)
         console.log(data)
+        
+       
+        }catch(error){
+            var box=document.getElementById("box3")
+            box.innerHTML=null
+            var div=document.createElement("div")
+        var img=document.createElement("img")
+        img.src="https://c.tenor.com/Q6bRBaD7GQkAAAAM/beepo-error.gif";
+     
+        div.style.width="200px";
+        div.style.margin="auto"
+        div.style.marginTop="5%";
+        
+        img.style.width="100%"
+        div.append(img);
+        box.append(div)
+        }
+      
+       
+       
        
     }
+   
     
 </script>
