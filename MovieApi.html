@@ -80,7 +80,8 @@ height: 1000px;
         
        
          
-            let res= await fetch (`https://www.omdbapi.com/?t=${movie}&apikey=c177405a`)
+            let res= await fetch (`https://www.omdbapi.com/?t=${movie}&apikey=c177405a`);
+            console.log(res)
             //    try to remember
            if(res.status!=200){
                throw new Error();
@@ -136,6 +137,7 @@ height: 1000px;
         
        
         }catch(error){
+            console.log(error)
             var box=document.getElementById("box3")
             box.innerHTML=null
             var div=document.createElement("div")
